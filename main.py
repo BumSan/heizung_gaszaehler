@@ -8,11 +8,6 @@ import configparser
 
 logging.basicConfig(level=logging.DEBUG)
 
-GPIO_INPUT = 24  # Pin 18
-
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(GPIO_INPUT, GPIO.IN)
-
 
 # reed is closed, when Level is High. Then we need to count 1 up
 def reed_closed(channel):
@@ -36,8 +31,6 @@ if __name__ == '__main__':
     db_connection = GZData(cfg)
     weather = OpenWeather(cfg)
 
-    gpioInput_position = GPIO.setmode(GPIO.BCM)
-
     # check start value for GZ. Either from config; or from DB (check which value is bigger)
     db_overall_gas = db_connection.read_overall_gas_in_cubicmeter()
     if db_overall_gas is not None:
@@ -51,7 +44,12 @@ if __name__ == '__main__':
         # cant read from DB: Use configured value
         db_connection.overallGasCountInCubicMeter = cfg.GZ_START_VALUE
 
-    # install IRQ
+    # Setup of GPIO to read status of reed contact
+    GPIO_INPUT = 24  # Pin 18
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(GPIO_INPUT, GPIO.IN)
+
+    # install Interrupts
     GPIO.add_event_detect(GPIO_INPUT, GPIO.RISING, callback=reed_closed, bouncetime=500)
     GPIO.add_event_detect(GPIO_INPUT, GPIO.FALLING, callback=reed_opened, bouncetime=500)
 
