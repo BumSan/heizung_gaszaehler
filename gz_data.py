@@ -7,7 +7,7 @@ class GZData:
     incrementPerTimeInCubicMeter: float = 0
     overallGasCountInCubicMeter: float = 0
     outdoorTemperature: float = 0
-    cloudiness: float = 0
+    cloudiness: int = 0
 
     def __init__(self, cfg: ConfigFile):
         # ToDo: Read last gas count from influx

@@ -8,7 +8,7 @@ class WeatherData:
 
     def __init__(self):
         self.outdoor_temperature: float = 0.0
-        self.cloudiness: float = 0.0
+        self.cloudiness: int = 0
 
 
 class OpenWeather:
