@@ -13,11 +13,13 @@ logging.basicConfig(level=logging.DEBUG)
 def reed_closed(channel):
     db_connection.incrementPerTimeInCubicMeter += 0.01
     db_connection.overallGasCountInCubicMeter += 0.01
+    logging.DEBUG('Rising Flank detected. Adding 0.01 m3.')
     return
 
 
 # reed is open, when Level is Low. For now ignore.
 def reed_opened(channel):
+    logging.DEBUG('Falling Flank detected.')
     return
 
 
@@ -25,7 +27,7 @@ if __name__ == '__main__':
 
     # Config file
     config = configparser.ConfigParser()
-    config.read('example_gz_config.ini')
+    config.read('gz_config.ini')
 
     cfg = ConfigFile(config)
     db_connection = GZData(cfg)
