@@ -9,17 +9,11 @@ import configparser
 logging.basicConfig(level=logging.DEBUG)
 
 
-# reed is closed, when Level is High. Then we need to count 1 up
+# reed is closed, when Level changes to High. Then we need to count 1 up
 def reed_closed(channel):
     db_connection.incrementPerTimeInCubicMeter += 0.01
     db_connection.overallGasCountInCubicMeter += 0.01
     logging.DEBUG('Rising Flank detected. Adding 0.01 m3.')
-    return
-
-
-# reed is open, when Level is Low. For now ignore.
-def reed_opened(channel):
-    logging.DEBUG('Falling Flank detected.')
     return
 
 
@@ -53,7 +47,6 @@ if __name__ == '__main__':
 
     # install Interrupts
     GPIO.add_event_detect(GPIO_INPUT, GPIO.RISING, callback=reed_closed, bouncetime=500)
-    GPIO.add_event_detect(GPIO_INPUT, GPIO.FALLING, callback=reed_opened, bouncetime=500)
 
     while True:
         # Reset increment for next cycle
