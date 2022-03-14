@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
     while True:
         # Reset increment for next cycle
-        db_connection.incrementPerTimeInCubicMeter = 0
+        _incrementPerTimeInCubicMeter = 0
 
         # wait for GZ updates via Interrupt
         time.sleep(cfg.WRITE_CYCLE_SECONDS)
