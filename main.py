@@ -19,7 +19,8 @@ def reed_closed(channel):
     _incrementPerTimeInCubicMeter += 0.01
     _overallGasCountInCubicMeter += 0.01
 
-    logging.DEBUG('Rising Flank detected. Adding 0.01 m3.')
+    logging.debug('Rising Flank detected. Adding 0.01 m3.')
+    return
 
 
 if __name__ == '__main__':
