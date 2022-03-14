@@ -1,6 +1,6 @@
 from config_file import ConfigFile
 from gz_data import GZData
-from openweather import OpenWeather
+from openweather import OpenWeather, WeatherData
 import RPi.GPIO as GPIO
 import logging
 import time
@@ -66,8 +66,10 @@ if __name__ == '__main__':
         # wait for GZ updates via Interrupt
         time.sleep(cfg.WRITE_CYCLE_SECONDS)
 
-        # get Outdoor Temperature
-        db_connection.outdoorTemperature = weather.get_outdoor_temperature()
+        # get Outdoor Temperature and Cloudiness
+        weather_data = weather.get_weather_data()
+        db_connection.outdoorTemperature = weather_data.outdoor_temperature
+        db_connection.cloudiness = weather_data.cloudiness
 
         # write everything to Influx
         db_connection.overallGasCountInCubicMeter = _overallGasCountInCubicMeter

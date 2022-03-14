@@ -6,7 +6,8 @@ import logging
 class GZData:
     incrementPerTimeInCubicMeter: float = 0
     overallGasCountInCubicMeter: float = 0
-    outdoorTemperature: int = 0
+    outdoorTemperature: float = 0
+    cloudiness: float = 0
 
     def __init__(self, cfg: ConfigFile):
         # ToDo: Read last gas count from influx
@@ -23,8 +24,9 @@ class GZData:
                                     , password=self.cfg.INFLUX_PWD)
 
             line_gz = 'gaszaehler,sensor=gas incrementPerTimeInCubicMeter=' + str(self.incrementPerTimeInCubicMeter) \
-                + ',overallGasInCubicMeter=' + str(self.overallGasCountInCubicMeter) \
-                + ',outdoorTemperature=' + str(self.outdoorTemperature)
+                      + ',overallGasInCubicMeter=' + str(self.overallGasCountInCubicMeter) \
+                      + ',outdoorTemperature=' + str(self.outdoorTemperature) \
+                      + ',cloudiness=' + str(self.cloudiness)
 
             if not influx.write([line_gz], params={'epoch': 's', 'db': self.cfg.INFLUX_DB_NAME},
                                 expected_response_code=204, protocol='line'):
@@ -56,4 +58,3 @@ class GZData:
             logging.critical('DB Connection is gone')
 
         return overall_gas
-
