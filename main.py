@@ -8,16 +8,23 @@ import configparser
 
 logging.basicConfig(level=logging.DEBUG)
 
+_incrementPerTimeInCubicMeter = 0
+_overallGasCountInCubicMeter = 0
 
 # reed is closed, when Level changes to High. Then we need to count 1 up
 def reed_closed(channel):
-    db_connection.incrementPerTimeInCubicMeter += 0.01
-    db_connection.overallGasCountInCubicMeter += 0.01
+    global _incrementPerTimeInCubicMeter
+    global _overallGasCountInCubicMeter
+    _incrementPerTimeInCubicMeter += 0.01
+    _overallGasCountInCubicMeter += 0.01
+
     logging.DEBUG('Rising Flank detected. Adding 0.01 m3.')
     return
 
 
 if __name__ == '__main__':
+
+    global _overallGasCountInCubicMeter
 
     # Config file
     config = configparser.ConfigParser()
@@ -40,6 +47,9 @@ if __name__ == '__main__':
         # cant read from DB: Use configured value
         db_connection.overallGasCountInCubicMeter = cfg.GZ_START_VALUE
 
+    # save to global var so we can access it in interrupt callback
+    _overallGasCountInCubicMeter = db_connection.overallGasCountInCubicMeter
+
     # Setup of GPIO to read status of reed contact
     GPIO_INPUT = 24  # Pin 18
     GPIO.setmode(GPIO.BCM)
@@ -59,6 +69,8 @@ if __name__ == '__main__':
         db_connection.outdoorTemperature = weather.get_outdoor_temperature()
 
         # write everything to Influx
+        db_connection.overallGasCountInCubicMeter = _overallGasCountInCubicMeter
+        db_connection.incrementPerTimeInCubicMeter = _incrementPerTimeInCubicMeter
         db_connection.write_gzdata_to_db()
 
     GPIO.cleanup()
