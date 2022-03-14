@@ -8,7 +8,7 @@ import configparser
 
 logging.basicConfig(level=logging.DEBUG)
 
-_incrementPerTimeInCubicMeter: float = 0.0
+_incrementPerTimeInCubicMeter: float = 0.00
 # _overallGasCountInCubicMeter = 0
 
 
@@ -20,7 +20,6 @@ def reed_closed(channel):
     _overallGasCountInCubicMeter += 0.01
 
     logging.DEBUG('Rising Flank detected. Adding 0.01 m3.')
-    return
 
 
 if __name__ == '__main__':
