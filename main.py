@@ -8,8 +8,9 @@ import configparser
 
 logging.basicConfig(level=logging.DEBUG)
 
-_incrementPerTimeInCubicMeter = 0
+_incrementPerTimeInCubicMeter: float = 0.0
 # _overallGasCountInCubicMeter = 0
+
 
 # reed is closed, when Level changes to High. Then we need to count 1 up
 def reed_closed(channel):
