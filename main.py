@@ -6,7 +6,7 @@ import logging
 import time
 import configparser
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.CRITICAL)
 
 _incrementPerTimeInCubicMeter: float = 0.00
 # _overallGasCountInCubicMeter = 0
