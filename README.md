@@ -1,8 +1,8 @@
 # Counting pulses of a gas meter and drop them with some weather data into InfluxDB
 ## Main Features
 * Counting pulses via reed contact, which is connected to the GPIO
-  * Using a 47k Pull-Down to GND
-  * Reed connects it to 5V -> the script is counting high pulses (with some debouncing)
+  * In my setup, using a physical 47k Pull-Down to GND
+  * Closed Reed contact connects it to 5V -> the script is counting high pulses (with some debouncing)
 * Weather Data (cloudiness and outdoor temperature) via OpenWeather API
 * configurable start value for gas meter
   * For restarts the script is using the latest value from the InfluxDB
