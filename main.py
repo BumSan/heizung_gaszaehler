@@ -6,12 +6,10 @@ import logging
 import time
 import configparser
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.CRITICAL)
 
 GPIO_INPUT = 24  # Pin 18
-
 _incrementPerTimeInCubicMeter: float = 0.00
-# _overallGasCountInCubicMeter = 0
 
 
 # reed is closed, when Level changes to High. Then we need to count 1 up
