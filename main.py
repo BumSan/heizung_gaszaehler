@@ -6,7 +6,7 @@ import logging
 import time
 import configparser
 
-logging.basicConfig(level=logging.CRITICAL)
+logging.basicConfig(level=logging.DEBUG)
 
 GPIO_INPUT = 24  # Pin 18
 
