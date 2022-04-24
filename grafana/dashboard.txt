@@ -50,21 +50,30 @@
           "decimals": 2,
           "mappings": [],
           "thresholds": {
-            "mode": "absolute",
+            "mode": "percentage",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           },
           "unit": "m3"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "gaszaehler.sum"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "usage m3/h"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 9,
@@ -87,12 +96,15 @@
         "orientation": "auto",
         "showValue": "auto",
         "stacking": "none",
+        "text": {
+          "valueSize": 14
+        },
         "tooltip": {
           "mode": "single",
           "sort": "none"
         },
         "xTickLabelRotation": 0,
-        "xTickLabelSpacing": -100
+        "xTickLabelSpacing": 100
       },
       "targets": [
         {
@@ -129,7 +141,7 @@
               },
               {
                 "params": [],
-                "type": "mean"
+                "type": "sum"
               }
             ]
           ],
@@ -151,6 +163,7 @@
           "color": {
             "mode": "thresholds"
           },
+          "decimals": 2,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -288,7 +301,20 @@
             ]
           }
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "gaszaehler.mean"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Cloudiness"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -409,7 +435,20 @@
           },
           "unit": "celsius"
         },
-        "overrides": []
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "gaszaehler.mean"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Outdoor Temp"
+              }
+            ]
+          }
+        ]
       },
       "gridPos": {
         "h": 8,
@@ -481,7 +520,7 @@
       "type": "timeseries"
     }
   ],
-  "refresh": "",
+  "refresh": "5s",
   "schemaVersion": 35,
   "style": "dark",
   "tags": [],
@@ -496,6 +535,6 @@
   "timezone": "",
   "title": "Gas Usage",
   "uid": "llNUUvigk",
-  "version": 7,
+  "version": 16,
   "weekStart": ""
 }
