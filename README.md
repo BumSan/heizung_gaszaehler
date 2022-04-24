@@ -11,6 +11,7 @@
 * Tested with BK-G4T gas meter and Raspberry Pi Zero W
 
 * If you need an example Grafana Dashboard, please see it in the respective folder.
+* For a housing, check my Printables Page: https://www.printables.com/model/177553-raspi-zero-housing-for-bk-g4t-gas-meter
 
 
 
