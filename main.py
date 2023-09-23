@@ -8,7 +8,7 @@ import configparser
 
 logging.basicConfig(level=logging.CRITICAL)
 
-GPIO_INPUT = 24  # Pin 18
+GPIO_INPUT = 18  # Pin 18
 _incrementPerTimeInCubicMeter: float = 0.00
 
 
@@ -63,7 +63,7 @@ if __name__ == '__main__':
     _overallGasCountInCubicMeter = db_connection.overallGasCountInCubicMeter
 
     # Setup of GPIO to read status of reed contact
-    GPIO.setmode(GPIO.BCM)
+    GPIO.setmode(GPIO.BOARD)
     GPIO.setup(GPIO_INPUT, GPIO.IN)
 
     # install Interrupts
